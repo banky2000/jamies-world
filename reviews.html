@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Retro Reviews</title>
+  <style>
+    body {
+      background: black;
+      color: lime;
+      font-family: 'Press Start 2P', monospace;
+      padding: 20px;
+    }
+    .review-form, .review {
+      background: #111;
+      border: 2px solid lime;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+    input, textarea, button {
+      font-family: inherit;
+      background: black;
+      color: lime;
+      border: 1px solid lime;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+    .likes {
+      margin-top: 5px;
+    }
+    .like-btn, .dislike-btn {
+      background: lime;
+      color: black;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🕹️ Leave a Retro Review</h1>
+
+  <div class="review-form">
+    <input type="text" id="name" placeholder="Your name " />
+    <textarea id="message" rows="4" placeholder="Say something cool..."></textarea>
+    <button onclick="submitReview()">Submit</button>
+  </div>
+
+  <div id="reviews"></div>
+
+  <script>
+    let reviews = JSON.parse(localStorage.getItem("retroReviews")) || [];
+
+    function submitReview() {
+      const name = document.getElementById('name').value || "Anonymous";
+      const message = document.getElementById('message').value;
+      if (message.trim() === "") return;
+
+      reviews.push({ name, message, likes: 0, dislikes: 0 });
+      localStorage.setItem("retroReviews", JSON.stringify(reviews));
+      document.getElementById('message').value = "";
+      renderReviews();
+    }
+
+    function likeReview(index) {
+      reviews[index].likes++;
+      localStorage.setItem("retroReviews", JSON.stringify(reviews));
+      renderReviews();
+    }
+
+    function dislikeReview(index) {
+      reviews[index].dislikes++;
+      localStorage.setItem("retroReviews", JSON.stringify(reviews));
+      renderReviews();
+    }
+
+    function renderReviews() {
+      const container = document.getElementById('reviews');
+      container.innerHTML = '';
+      reviews.forEach((rev, index) => {
+        container.innerHTML += `
+          <div class="review">
+            <strong>${rev.name}</strong><br/>
+            <p>${rev.message}</p>
+            <div class="likes">
+              <button class="like-btn" onclick="likeReview(${index})">👍 ${rev.likes}</button>
+              <button class="dislike-btn" onclick="dislikeReview(${index})">👎 ${rev.dislikes}</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    renderReviews();
+  </script>
+
+<div class="button-container">
+    <a href="index.html" class="pixel-button">Home</a>
+    <a href="projects.html" class="pixel-button">Projects</a>
+    <a href="about.html" class="pixel-button">About Me</a>
+    <a href="contact.html" class="pixel-button">Contact</a>
+    <a href="reviews.html" class="pixel-button">Reviews</a>
+  </div>
+  
+</body>
+</html>
