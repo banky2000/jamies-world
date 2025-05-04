@@ -13,6 +13,10 @@
 </head>
 <body>
 
+  <div id="visit-counter" style="display: flex; align-items: center; font-family: 'Press Start 2P', monospace; color: red; font-size: 14px; padding: 10px;">
+    <img src="images/jamie-mushroom.png" alt="Heart Icon" style="width: 50px; margin-right: 8px;">
+   Visitors: <span id="visit-count">0</span>
+  </div>
   
 
   <div class="character">
@@ -34,7 +38,14 @@
   </div>
 
   <script src="apps.js"></script>
-
+  <script>
+    fetch('https://api.countapi.xyz/hit/jamiesworld/homepage')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('visit-count').textContent = data.value;
+      });
+  </script>
+  
 
 
 
