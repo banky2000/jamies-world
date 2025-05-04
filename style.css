@@ -159,6 +159,70 @@ body {
     font-family: 'Press Start 2P', monospace;
   }
   
+  @media (max-width: 768px) {
+    body {
+      font-size: 10px;
+      padding: 10px;
+    }
+  
+    .header h1 {
+      font-size: 14px;
+    }
+  
+    .character img,
+    .character-small img {
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+  
+    .content {
+      padding: 10px;
+      margin: 10px;
+    }
+  
+    .pixel-button {
+      font-size: 10px;
+      padding: 8px 12px;
+      margin: 5px;
+    }
+  
+    .projects-page {
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+  
+    .project-box {
+      font-size: 8px;
+      padding: 10px;
+    }
+  
+    #visitor-counter {
+      top: auto;
+      bottom: 10px;
+      right: 10px;
+      font-size: 12px;
+      padding: 4px 6px;
+      gap: 4px;
+    }
+  
+    #visitor-counter img {
+      width: 20px;
+    }
+  
+    .review-form input,
+    .review-form textarea,
+    .review-form button {
+      font-size: 10px;
+    }
+  
+    .single-review {
+      font-size: 10px;
+    }
+  }
+  
+
   /* other styles... */
 
 
