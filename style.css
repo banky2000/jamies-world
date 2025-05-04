@@ -165,6 +165,15 @@ body {
     height: auto;
   }
   
+  .single-review {
+    background: #111;
+    border: 2px solid lime;
+    padding: 10px;
+    margin-bottom: 15px;
+    color: lime;
+    font-family: 'Press Start 2P', monospace;
+  }
+  
   /* other styles... */
 
 

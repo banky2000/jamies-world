@@ -4,16 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Retro Reviews</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+
   <style>
     body {
       background: black;
-      color: lime;
+      color: white;
       font-family: 'Press Start 2P', monospace;
       padding: 20px;
     }
     .review-form, .review {
-      background: #111;
-      border: 2px solid lime;
+      background: #2e2e2e;
+      border: 2px solid #00d8ff;
       padding: 10px;
       margin-bottom: 15px;
     }
@@ -21,7 +25,7 @@
       font-family: inherit;
       background: black;
       color: lime;
-      border: 1px solid lime;
+      border: 1px solid #00d8ff
       width: 100%;
       margin-bottom: 10px;
       padding: 5px;
@@ -30,7 +34,7 @@
       margin-top: 5px;
     }
     .like-btn, .dislike-btn {
-      background: lime;
+      background: #00d8ff;
       color: black;
       margin-right: 10px;
       cursor: pointer;
@@ -48,6 +52,10 @@
   </div>
 
   <div id="reviews"></div>
+
+  <h2>What People Are Saying</h2>
+<div id="review-list" class="review-container"></div>
+
 
   <script>
     let reviews = JSON.parse(localStorage.getItem("retroReviews")) || [];
