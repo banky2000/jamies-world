@@ -6,7 +6,7 @@ body {
   }
   
   .header {
-    background: #ff0040;
+    background: #11ff00;
     color: white;
     text-align: center;
     padding: 40px 10px;
@@ -143,4 +143,29 @@ body {
     margin-top: 30px;
   }
   
+  #visitor-counter {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #222;
+    color: #fff;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 16px;
+    padding: 6px 10px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 1000;
+    box-shadow: 2px 2px 0 #000;
+  }
+  #visitor-counter img {
+    width: 40px;
+    height: auto;
+  }
+  
+  /* other styles... */
+
+
   
