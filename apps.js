@@ -12,7 +12,6 @@ buttons.forEach(button => {
 });
 
 
-const db = firebase.firestore(); // Reuse your initialized Firebase
 
 const reviewsRef = db.collection("reviews");
 
