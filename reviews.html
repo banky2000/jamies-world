@@ -6,6 +6,10 @@
   <title>Retro Reviews</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<!-- Firebase App (compat) -->
+<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+<!-- Firestore -->
+<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
 
 
   <style>
@@ -35,6 +39,21 @@
       cursor: pointer;
     }
   </style>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyD51x2Q-ndQYOOd7XffO0Tr2_4CGYzFOxU",
+      authDomain: "jamiesworld-counter.firebaseapp.com",
+      projectId: "jamiesworld-counter",
+      storageBucket: "jamiesworld-counter.firebasestorage.app",
+      messagingSenderId: "980147429276",
+      appId: "1:980147429276:web:332ab02f4b52e0fcbbb259",
+      measurementId: "G-GD6X3XCHZC"
+    };
+  
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  </script>
+  
 </head>
 <body>
 
