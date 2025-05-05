@@ -40,18 +40,9 @@
     }
   </style>
   <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyD51x2Q-ndQYOOd7XffO0Tr2_4CGYzFOxU",
-      authDomain: "jamiesworld-counter.firebaseapp.com",
-      projectId: "jamiesworld-counter",
-      storageBucket: "jamiesworld-counter.firebasestorage.app",
-      messagingSenderId: "980147429276",
-      appId: "1:980147429276:web:332ab02f4b52e0fcbbb259",
-      measurementId: "G-GD6X3XCHZC"
-    };
   
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+  
+   
   </script>
   
 </head>
@@ -72,49 +63,7 @@
 
 
   <script>
-    let reviews = JSON.parse(localStorage.getItem("retroReviews")) || [];
-
-    function submitReview() {
-      const name = document.getElementById('name').value || "Anonymous";
-      const message = document.getElementById('message').value;
-      if (message.trim() === "") return;
-
-      reviews.push({ name, message, likes: 0, dislikes: 0 });
-      localStorage.setItem("retroReviews", JSON.stringify(reviews));
-      document.getElementById('message').value = "";
-      renderReviews();
-    }
-
-    function likeReview(index) {
-      reviews[index].likes++;
-      localStorage.setItem("retroReviews", JSON.stringify(reviews));
-      renderReviews();
-    }
-
-    function dislikeReview(index) {
-      reviews[index].dislikes++;
-      localStorage.setItem("retroReviews", JSON.stringify(reviews));
-      renderReviews();
-    }
-
-    function renderReviews() {
-      const container = document.getElementById('reviews');
-      container.innerHTML = '';
-      reviews.forEach((rev, index) => {
-        container.innerHTML += `
-          <div class="review">
-            <strong>${rev.name}</strong><br/>
-            <p>${rev.message}</p>
-            <div class="likes">
-              <button class="like-btn" onclick="likeReview(${index})">👍 ${rev.likes}</button>
-              <button class="dislike-btn" onclick="dislikeReview(${index})">👎 ${rev.dislikes}</button>
-            </div>
-          </div>
-        `;
-      });
-    }
-
-    renderReviews();
+  
   </script>
 
 <div class="button-container">
