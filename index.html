@@ -2,101 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jamie's World</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
-  <!-- Google Pixel Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <!-- Firebase v8 CDN -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-  <!-- Link to your external stylesheet -->
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Firebase App (compatible version) -->
-<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
-<!-- Firebase Firestore (compatible version) -->
-<script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
-
-<script type="module" src="apps.js"></script>
-
+  <style>
+    body {
+      background-color: black;
+      color: lime;
+      font-family: 'Press Start 2P', cursive;
+      text-align: center;
+      padding: 2rem;
+    }
+    .pixel-button {
+      background: #00d8ff;
+      color: black;
+      font-family: 'Press Start 2P', cursive;
+      border: 2px solid lime;
+      padding: 10px 20px;
+      text-decoration: none;
+      margin: 10px;
+      display: inline-block;
+    }
+  </style>
 </head>
 <body>
 
- 
-  
-
-  <div class="character">
-    <img src="images/jamies-header.png" alt="Pixel Character" />
-  </div>
-
-  <div class="content">
-    <p>Welcome to my digital retro-world!!!! Jump into my 16BIT journey and follow me as  I learn new skills and make many mistakes along the way……</p>
-    
-    <p>Check out my latest creations, from retro websites to wedding photo apps and more. Powered by pixels and passion!</p>
-  </div>
+  <h1>👾 Welcome to Jamie's World</h1>
+  <p>You're visitor number: <span id="visitor-count">Loading...</span></p>
 
   <div class="button-container">
+    <a href="index.html" class="pixel-button">Home</a>
     <a href="projects.html" class="pixel-button">Projects</a>
     <a href="about.html" class="pixel-button">About Me</a>
     <a href="contact.html" class="pixel-button">Contact</a>
     <a href="reviews.html" class="pixel-button">Reviews</a>
-
   </div>
 
- 
-  <script>
-    fetch('https://api.countapi.xyz/hit/jamiesworld/homepage')
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('visit-count').textContent = data.value;
-      });
-  </script>
-  
-  <div id="visitor-counter">
-    <img src="images/jamie-mushroom.png" alt="Mushroom Icon" />
-    <span id="visit-count">0</span>
-  </div>
-  <script>
-    // 🔧 Replace this with YOUR Firebase config:
-    const firebaseConfig = {
-      apiKey: "AIzaSyD51x2Q-ndQYOOd7XffO0Tr2_4CGYzFOxU",
-  authDomain: "jamiesworld-counter.firebaseapp.com",
-  projectId: "jamiesworld-counter",
-  storageBucket: "jamiesworld-counter.firebasestorage.app",
-  messagingSenderId: "980147429276",
-  appId: "1:980147429276:web:332ab02f4b52e0fcbbb259",
-  measurementId: "G-GD6X3XCHZC"
-    };
-  
-    // Initialize Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-  
-    const counterRef = db.collection("visitors").doc("counter");
-  
-    async function updateVisitorCount() {
-      try {
-        const doc = await counterRef.get();
-        if (doc.exists) {
-          const newCount = doc.data().count + 1;
-          await counterRef.set({ count: newCount });
-          document.getElementById('visit-count').textContent = newCount;
-        } else {
-          await counterRef.set({ count: 1 });
-          document.getElementById('visit-count').textContent = 1;
-        }
-      } catch (err) {
-        console.error("Error updating counter:", err);
-        document.getElementById('visit-count').textContent = "Error";
-      }
-    }
-  
-    updateVisitorCount();
-  </script>
-  
-  
-
-
-
-
+  <script src="apps.js"></script>
 </body>
 </html>

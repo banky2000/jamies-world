@@ -1,8 +1,3 @@
-// === Import Firebase ===
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, query, orderBy, getDocs } from "firebase/firestore";
-import { serverTimestamp } from "firebase/firestore";
-
 // === Firebase Config ===
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY",
@@ -14,26 +9,31 @@ const firebaseConfig = {
 };
 
 // === Initialize Firebase ===
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const reviewsRef = collection(db, "reviews");
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const reviewsRef = db.collection("reviews");
+const counterRef = db.collection("metadata").doc("visitors");
 
-// === Click Sound ===
-const clickSound = new Audio('sounds/blip.wav');
-const buttons = document.querySelectorAll('.pixel-button');
+// === Visitor Counter ===
+async function incrementVisitorCount() {
+  try {
+    await counterRef.set({
+      count: firebase.firestore.FieldValue.increment(1)
+    }, { merge: true });
 
-buttons.forEach(button => {
-  button.addEventListener('click', () => {
-    clickSound.currentTime = 0;
-    clickSound.play();
-  });
-});
+    const doc = await counterRef.get();
+    const count = doc.exists ? doc.data().count : 1;
+    const counterEl = document.getElementById("visitor-count");
+    if (counterEl) counterEl.innerText = count;
+  } catch (error) {
+    console.error("Visitor counter error:", error);
+  }
+}
 
 // === Load Reviews ===
 async function loadReviews() {
   try {
-    const q = query(reviewsRef, orderBy("timestamp", "desc"));
-    const snapshot = await getDocs(q);
+    const snapshot = await reviewsRef.orderBy("timestamp", "desc").get();
     const reviewList = document.getElementById("review-list");
     if (!reviewList) return;
     reviewList.innerHTML = "";
@@ -61,12 +61,10 @@ async function submitReview() {
   if (!message) return;
 
   try {
-    await addDoc(reviewsRef, {
+    await reviewsRef.add({
       name,
       message,
-      likes: 0,
-      dislikes: 0,
-      timestamp: serverTimestamp()
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
     });
     document.getElementById('message').value = "";
     loadReviews();
@@ -75,8 +73,11 @@ async function submitReview() {
   }
 }
 
-// === Load on DOM Ready ===
+// === Init on DOM Load ===
 document.addEventListener("DOMContentLoaded", () => {
+  if (document.getElementById("visitor-count")) {
+    incrementVisitorCount();
+  }
   if (document.getElementById("review-list")) {
     loadReviews();
   }
