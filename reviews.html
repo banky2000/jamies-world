@@ -7,20 +7,18 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
-  <!-- Firebase v8 CDN -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
   <style>
     body, .review-form, .single-review {
       background: black;
       color: lime;
       font-family: 'Press Start 2P', cursive;
+      text-align: center;
     }
     .review-form {
       border: 2px solid #00d8ff;
       padding: 10px;
-      margin-bottom: 15px;
+      margin: 0 auto 15px auto;
+      max-width: 600px;
     }
     input, textarea, button {
       background: black;
@@ -34,7 +32,9 @@
     .single-review {
       border: 1px solid #00d8ff;
       padding: 10px;
-      margin-bottom: 10px;
+      margin: 10px auto;
+      max-width: 600px;
+      text-align: left;
     }
     .pixel-button {
       background: #00d8ff;
@@ -45,6 +45,9 @@
       text-decoration: none;
       margin: 10px;
       display: inline-block;
+    }
+    .button-container {
+      margin-top: 2rem;
     }
   </style>
 </head>
@@ -68,6 +71,39 @@
     <a href="contact.html" class="pixel-button">Contact</a>
   </div>
 
-  <script src="apps.js"></script>
+  <script type="module">
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+    import { getApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+
+    const app = getApp();
+    const db = getFirestore(app);
+
+    window.submitReview = async function () {
+      const name = document.getElementById("name").value.trim();
+      const text = document.getElementById("message").value.trim();
+
+      if (!name || !text) {
+        alert("Please fill in both fields.");
+        return;
+      }
+
+      try {
+        await addDoc(collection(db, "reviews"), {
+          name: name,
+          text: text,
+          timestamp: serverTimestamp()
+        });
+        document.getElementById("name").value = "";
+        document.getElementById("message").value = "";
+        alert("Review submitted!");
+        location.reload();
+      } catch (err) {
+        console.error("Error adding review:", err);
+        alert("Failed to submit review.");
+      }
+    }
+  </script>
+
+  <script src="apps.js" type="module"></script>
 </body>
 </html>

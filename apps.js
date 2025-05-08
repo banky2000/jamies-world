@@ -1,84 +1,63 @@
-// === Firebase Config ===
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
+// apps.js (Firebase Modular v9+)
 
-// === Initialize Firebase ===
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const reviewsRef = db.collection("reviews");
-const counterRef = db.collection("metadata").doc("visitors");
+import { getFirestore, doc, getDoc, updateDoc, setDoc, collection, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+import { getApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
 
-// === Visitor Counter ===
-async function incrementVisitorCount() {
+const app = getApp();
+const db = getFirestore(app);
+
+// 1. VISITOR COUNTER
+async function updateVisitorCount() {
+  const counterRef = doc(db, "siteStats", "visits");
+
   try {
-    await counterRef.set({
-      count: firebase.firestore.FieldValue.increment(1)
-    }, { merge: true });
+    const snap = await getDoc(counterRef);
 
-    const doc = await counterRef.get();
-    const count = doc.exists ? doc.data().count : 1;
-    const counterEl = document.getElementById("visitor-count");
-    if (counterEl) counterEl.innerText = count;
-  } catch (error) {
-    console.error("Visitor counter error:", error);
+    if (snap.exists()) {
+      const currentCount = snap.data().count || 0;
+      await updateDoc(counterRef, { count: currentCount + 1 });
+      document.getElementById("visitor-count").innerText = currentCount + 1;
+    } else {
+      await setDoc(counterRef, { count: 1 });
+      document.getElementById("visitor-count").innerText = 1;
+    }
+  } catch (err) {
+    console.error("Visitor counter error:", err);
+    document.getElementById("visitor-count").innerText = "Error";
   }
 }
 
-// === Load Reviews ===
+updateVisitorCount();
+
+// 2. CENTER HEADER IMAGE + SIZE (already handled via CSS in index.html)
+// Use this if you want to override via JS instead (optional):
+const headerImg = document.querySelector('.header-image');
+if (headerImg) {
+  headerImg.style.margin = '0 auto 2rem auto';
+  headerImg.style.maxWidth = '600px';
+}
+
+// 3. LOAD REVIEWS (for reviews.html only)
 async function loadReviews() {
-  try {
-    const snapshot = await reviewsRef.orderBy("timestamp", "desc").get();
-    const reviewList = document.getElementById("review-list");
-    if (!reviewList) return;
-    reviewList.innerHTML = "";
+  const reviewList = document.getElementById("review-list");
+  if (!reviewList) return; // only run this on reviews.html
 
-    snapshot.forEach((doc) => {
-      const review = doc.data();
-      const reviewElement = document.createElement("div");
-      reviewElement.classList.add("single-review");
-      reviewElement.innerHTML = `
-        <p><strong>${review.name}</strong> says:</p>
-        <p>${review.message}</p>
-        <hr />
-      `;
-      reviewList.appendChild(reviewElement);
+  try {
+    const reviewsCol = collection(db, "reviews");
+    const q = query(reviewsCol, orderBy("timestamp", "desc"));
+    const querySnapshot = await getDocs(q);
+
+    reviewList.innerHTML = ""; // clear existing
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      const div = document.createElement("div");
+      div.className = "review";
+      div.innerHTML = `<p><strong>${data.name}:</strong> ${data.text}</p>`;
+      reviewList.appendChild(div);
     });
-  } catch (error) {
-    console.error("Error loading reviews:", error);
+  } catch (err) {
+    console.error("Failed to load reviews:", err);
   }
 }
 
-// === Submit Review ===
-async function submitReview() {
-  const name = document.getElementById('name').value || "Anonymous";
-  const message = document.getElementById('message').value.trim();
-  if (!message) return;
-
-  try {
-    await reviewsRef.add({
-      name,
-      message,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
-    document.getElementById('message').value = "";
-    loadReviews();
-  } catch (error) {
-    console.error("Error submitting review:", error);
-  }
-}
-
-// === Init on DOM Load ===
-document.addEventListener("DOMContentLoaded", () => {
-  if (document.getElementById("visitor-count")) {
-    incrementVisitorCount();
-  }
-  if (document.getElementById("review-list")) {
-    loadReviews();
-  }
-});
+loadReviews();

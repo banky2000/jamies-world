@@ -7,10 +7,6 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
-  <!-- Firebase v8 CDN -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
   <style>
     body {
       background-color: black;
@@ -29,9 +25,18 @@
       margin: 10px;
       display: inline-block;
     }
+    .header-image {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      margin-bottom: 2rem;
+    }
   </style>
 </head>
 <body>
+
+  <!-- ✅ Header image -->
+  <img src="images/jamies-header.png" alt="Jamie's Header" class="header-image" />
 
   <h1>👾 Welcome to Jamie's World</h1>
   <p>You're visitor number: <span id="visitor-count">Loading...</span></p>
@@ -44,6 +49,28 @@
     <a href="reviews.html" class="pixel-button">Reviews</a>
   </div>
 
-  <script src="apps.js"></script>
+  <!-- ✅ Firebase Setup -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD51x2Q-ndQYOOd7XffO0Tr2_4CGYzFOxU",
+      authDomain: "jamiesworld-counter.firebaseapp.com",
+      projectId: "jamiesworld-counter",
+      storageBucket: "jamiesworld-counter.firebasestorage.app",
+      messagingSenderId: "980147429276",
+      appId: "1:980147429276:web:332ab02f4b52e0fcbbb259",
+      measurementId: "G-GD6X3XCHZC"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const analytics = getAnalytics(app);
+  </script>
+
+  <script src="apps.js" type="module"></script>
+
 </body>
 </html>
