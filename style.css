@@ -244,3 +244,17 @@ body {
     font-size: 10px;
   }
 }
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.header-image {
+  animation: bounce 2s infinite ease-in-out;
+}
+
