@@ -71,39 +71,11 @@
     <a href="contact.html" class="pixel-button">Contact</a>
   </div>
 
-  <script type="module">
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
-    import { getApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+ 
 
-    const app = getApp();
-    const db = getFirestore(app);
+<script type="module" src="firebase-init.js"></script>
+<script type="module" src="apps.js"></script>
 
-    window.submitReview = async function () {
-      const name = document.getElementById("name").value.trim();
-      const text = document.getElementById("message").value.trim();
-
-      if (!name || !text) {
-        alert("Please fill in both fields.");
-        return;
-      }
-
-      try {
-        await addDoc(collection(db, "reviews"), {
-          name: name,
-          text: text,
-          timestamp: serverTimestamp()
-        });
-        document.getElementById("name").value = "";
-        document.getElementById("message").value = "";
-        alert("Review submitted!");
-        location.reload();
-      } catch (err) {
-        console.error("Error adding review:", err);
-        alert("Failed to submit review.");
-      }
-    }
-  </script>
-
-  <script src="apps.js" type="module"></script>
+  
 </body>
 </html>
