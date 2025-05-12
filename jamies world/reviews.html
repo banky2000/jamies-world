@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Retro Reviews</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    body, .review-form, .single-review {
+      background: black;
+      color: lime;
+      font-family: 'Press Start 2P', cursive;
+      text-align: center;
+    }
+    .review-form {
+      border: 2px solid #00d8ff;
+      padding: 10px;
+      margin: 0 auto 15px auto;
+      max-width: 600px;
+    }
+    input, textarea, button {
+      background: black;
+      color: lime;
+      border: 1px solid #00d8ff;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 5px;
+      font-family: inherit;
+    }
+    .single-review {
+      border: 1px solid #00d8ff;
+      padding: 10px;
+      margin: 10px auto;
+      max-width: 600px;
+      text-align: left;
+    }
+    .pixel-button {
+      background: #00d8ff;
+      color: black;
+      font-family: 'Press Start 2P', cursive;
+      border: 2px solid lime;
+      padding: 10px 20px;
+      text-decoration: none;
+      margin: 10px;
+      display: inline-block;
+    }
+    .button-container {
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="images/jamie-star.png" alt="Star" class="bouncing-star" />
+  
+  <h1>🕹️ Leave a Retro Review</h1>
+
+  <div class="review-form">
+    <input type="text" id="name" placeholder="Your name" />
+    <textarea id="message" rows="4" placeholder="Say something cool..."></textarea>
+    <button onclick="submitReview()">Submit</button>
+  </div>
+
+  <h2>What People Are Saying</h2>
+  <div id="review-list" class="review-container"></div>
+
+  <div class="button-container">
+    <a href="index.html" class="pixel-button">Home</a>
+    <a href="projects.html" class="pixel-button">Projects</a>
+    <a href="about.html" class="pixel-button">About Me</a>
+    <a href="contact.html" class="pixel-button">Contact</a>
+    <a href="game.html" class="pixel-button">Game</a>
+  </div>
+
+ 
+
+<script type="module" src="firebase-init.js"></script>
+<script type="module" src="apps.js"></script>
+
+  
+</body>
+</html>

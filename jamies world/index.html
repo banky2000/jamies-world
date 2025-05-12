@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jamie's World</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: black;
+      color: lime;
+      font-family: 'Press Start 2P', cursive;
+      text-align: center;
+      padding: 2rem;
+    }
+    .pixel-button {
+      background: #00d8ff;
+      color: black;
+      font-family: 'Press Start 2P', cursive;
+      border: 2px solid lime;
+      padding: 10px 20px;
+      text-decoration: none;
+      margin: 10px;
+      display: inline-block;
+    }
+    .header-image {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+<img src="images/jamie-star.png" alt="Star" class="bouncing-star" />
+
+  <!-- ✅ Header image -->
+  <img src="images/jamies-header.png" alt="Jamie's Header" class="header-image" />
+
+  <h1>👾 Welcome to Jamie's World</h1>
+  <p>You're visitor number: <span id="visitor-count">Loading...</span></p>
+
+  <div class="button-container">
+    <a href="index.html" class="pixel-button">Home</a>
+    <a href="projects.html" class="pixel-button">Projects</a>
+    <a href="about.html" class="pixel-button">About Me</a>
+    <a href="contact.html" class="pixel-button">Contact</a>
+    <a href="game.html" class="pixel-button">Game</a>
+  </div>
+
+  <!-- ✅ Firebase Setup -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD51x2Q-ndQYOOd7XffO0Tr2_4CGYzFOxU",
+      authDomain: "jamiesworld-counter.firebaseapp.com",
+      projectId: "jamiesworld-counter",
+      storageBucket: "jamiesworld-counter.firebasestorage.app",
+      messagingSenderId: "980147429276",
+      appId: "1:980147429276:web:332ab02f4b52e0fcbbb259",
+      measurementId: "G-GD6X3XCHZC"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const analytics = getAnalytics(app);
+  </script>
+
+  <script type="module" src="firebase-init.js"></script>
+<script type="module" src="apps.js"></script>
+
+
+</body>
+</html>

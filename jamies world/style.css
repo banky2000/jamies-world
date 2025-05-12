@@ -1,0 +1,290 @@
+body {
+  margin: 0;
+  font-family: "Press Start 2P", cursive;
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.header {
+  background: #11ff00;
+  color: white;
+  text-align: center;
+  padding: 40px 10px;
+  border-bottom: 4px solid #00d8ff;
+}
+
+.header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.character {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.character img {
+  image-rendering: pixelated;
+  width: 500px;
+  height: auto;
+}
+
+.header-image {
+  display: block;
+  margin: 0 auto 2rem;
+  max-width: 600px;
+  width: 90%;
+  height: auto;
+}
+
+.content {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #2e2e2e;
+  border: 4px solid #00d8ff;
+  border-radius: 12px;
+}
+
+.content p {
+  line-height: 1.6;
+  font-size: 12px;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.projects-page {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.character-small img {
+  image-rendering: pixelated;
+  width: 300px;
+  height: auto;
+  margin-right: 20px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  flex: 1;
+}
+
+.project-box {
+  background: #2e2e2e;
+  border: 4px solid #00d8ff;
+  padding: 20px;
+  text-align: center;
+  font-family: "Press Start 2P", cursive;
+  font-size: 10px;
+  color: white;
+  box-shadow: 4px 4px 0px #000;
+  transition: transform 0.2s ease-in-out;
+}
+
+.project-box:hover {
+  background: #00d8ff;
+  color: black;
+  transform: scale(1.05);
+}
+
+.project-box a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.pixel-button {
+  display: inline-block;
+  padding: 12px 24px;
+  margin: 10px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 12px;
+  color: lime;
+  background: black;
+  border: 4px solid #00d8ff;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 4px 4px 0px #000;
+  transition: all 0.1s ease-in-out;
+}
+
+.pixel-button:hover {
+  background: lime;
+  color: black;
+  border-color: #ff0040;
+  box-shadow: 2px 2px 0px #000;
+}
+
+.pixel-button:active {
+  box-shadow: inset 2px 2px 0px #000;
+  transform: translate(2px, 2px);
+}
+
+#visitor-counter {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #222;
+  color: #fff;
+  font-family: "Press Start 2P", monospace;
+  font-size: 16px;
+  padding: 6px 10px;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1000;
+  box-shadow: 2px 2px 0 #000;
+}
+
+#visitor-counter img {
+  width: 40px;
+  height: auto;
+}
+
+.review-form {
+  border: 2px solid #00d8ff;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: black;
+}
+
+.review-form input,
+.review-form textarea,
+.review-form button {
+  background: black;
+  color: lime;
+  border: 1px solid #00d8ff;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 12px;
+}
+
+.single-review {
+  background: #111;
+  border: 2px solid lime;
+  padding: 10px;
+  margin-bottom: 15px;
+  color: lime;
+  font-family: "Press Start 2P", monospace;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 10px;
+    padding: 10px;
+  }
+
+  .header h1 {
+    font-size: 14px;
+  }
+
+  .character img,
+  .character-small img {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .header-image {
+    max-width: 90%;
+  }
+
+  .content {
+    padding: 10px;
+    margin: 10px;
+  }
+
+  .pixel-button {
+    font-size: 10px;
+    padding: 8px 12px;
+    margin: 5px;
+  }
+
+  .projects-page {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .project-box {
+    font-size: 8px;
+    padding: 10px;
+  }
+
+  #visitor-counter {
+    top: auto;
+    bottom: 10px;
+    right: 10px;
+    font-size: 12px;
+    padding: 4px 6px;
+    gap: 4px;
+  }
+
+  #visitor-counter img {
+    width: 20px;
+  }
+
+  .review-form input,
+  .review-form textarea,
+  .review-form button,
+  .single-review {
+    font-size: 10px;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.header-image {
+  animation: bounce 2s infinite ease-in-out;
+}
+
+
+.bouncing-star {
+  position: fixed;
+  bottom: 20px;
+  left: -100px;
+  width: 80px;
+  height: auto;
+  z-index: 1000;
+  image-rendering: pixelated;
+  animation: move-star 20s linear infinite, bounce-star 1s ease-in-out infinite;
+}
+
+@keyframes move-star {
+  0% {
+    left: -100px;
+  }
+  100% {
+    left: 110%;
+  }
+}
+
+@keyframes bounce-star {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Penalty Kick</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: white;
+      font-family: 'Press Start 2P', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      color: lime;
+      font-size: 4vw;
+      margin: 2vh 0;
+    }
+
+    .character img {
+      width: 25vw;
+      max-width: 100px;
+      image-rendering: pixelated;
+      margin-bottom: 1vh;
+    }
+
+    input, button {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 3vw;
+      padding: 1vh 1vw;
+      margin: 1vh;
+      border: none;
+      border-radius: 5px;
+      background: lime;
+      color: black;
+    }
+
+    input::placeholder {
+      color: #555;
+    }
+
+    canvas {
+      border: 4px solid lime;
+      background: #111;
+      image-rendering: pixelated;
+      width: 90vw;
+      max-width: 400px;
+      height: auto;
+      display: none;
+    }
+
+    #scoreboard {
+      margin-top: 2vh;
+      font-size: 2.5vw;
+      max-width: 90vw;
+    }
+
+    #scoreboard h2 {
+      font-size: 3vw;
+      margin-bottom: 1vh;
+    }
+
+    ul {
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      font-size: 3vw;
+      margin: 0.5vh 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Penalty Kick</h1>
+
+  <div class="character">
+    <img src="images/jamie-rugby2.png" alt="Pixel Character" />
+  </div>
+
+  <input type="text" id="playerName" maxlength="4" placeholder="Name (4 letters)">
+  <button id="startButton">Start Game</button>
+
+  <canvas id="gameCanvas" width="320" height="480"></canvas>
+
+  <div id="scoreboard">
+    <h2>Scoreboard</h2>
+    <ul id="scoresList"></ul>
+  </div>
+
+  <script src="game.js"></script>
+
+  <div class="button-container">
+    <a href="index.html" class="pixel-button">Home</a>
+    <a href="projects.html" class="pixel-button">Projects</a>
+    <a href="about.html" class="pixel-button">About Me</a>
+    <a href="contact.html" class="pixel-button">Contact</a>
+    <a href="reviews.html" class="pixel-button">Review</a>
+  </div>
+
+
+</body>
+</html>
